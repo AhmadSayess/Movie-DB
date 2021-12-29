@@ -8,10 +8,10 @@ app.get('/test', (req, res) => {
 })
 
 
-let today = new Date();
-let h = today.getHours();
-let m = today.getMinutes();
 app.get('/time', (req, res) => {
+  let today = new Date();
+  let h = today.getHours();
+  let m = today.getMinutes();
     res.send({status:200, message:`${h}:${m}`}
     )
   })
@@ -24,11 +24,10 @@ app.get('/hello/:id', (req, res) => {
   })
 
 
-  app.get('/search', (req, res) => {
+app.get('/search', (req, res) => {
     let s = req.query.s
-
-    if(s){
-      res.send({status:200, message:"ok", s}
+    if(s != null){
+      res.send({status:200, message:"ok", data:s}
       )}
       else {
         res.send({status:500, error:true, message:"you have to provide a search"})
