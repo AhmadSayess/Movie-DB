@@ -63,7 +63,30 @@ app.get('/search', (req, res) => {
       res.send({status:200, message:"delete movies"}
       )
     })
-    
+
+
+    app.get('/movies/read/by-date', (req, res) => {
+      movies.sort(function (a, b) {
+         return a.year - b.year
+       });
+       res.send({status:200, data:movies})
+     })
+
+
+     app.get('/movies/read/by-rating', (req, res) => {
+      movies.sort(function (a, b) {
+         return b.rating - a.rating
+       });
+       res.send({status:200, data:movies})
+     })
+
+     app.get('/movies/read/by-title', (req, res) => {
+      movies.sort(function (a, b) { 
+        return a.title.localeCompare(b.title)
+       });
+       res.send({status:200, data:movies})
+     })
+
 
 
 app.listen(port, () => {
