@@ -37,12 +37,11 @@ app.get('/search', (req, res) => {
     })
 
     const movies = [
-      { title: 'Jaws', year: 1975, rating: 8 },
-      { title: 'Avatar', year: 2009, rating: 7.8 },
-      { title: 'Brazil', year: 1985, rating: 8 },
-      { title: 'erheb kabeb', year: 1992, rating: 6.2 }
+                      { title: 'Jaws', year: 1975, rating: 8 },
+                      { title: 'Avatar', year: 2009, rating: 7.8 },
+                      { title: 'Brazil', year: 1985, rating: 8 },
+                      { title: 'erheb kabeb', year: 1992, rating: 6.2 }
   ] 
-    
 
     app.get('/movies/create', (req, res) => {
       res.send({status:200, message:"create movies"}
@@ -86,6 +85,21 @@ app.get('/search', (req, res) => {
        });
        res.send({status:200, data:movies})
      })
+
+     app.get('/movies/read/id/:id', (req, res) => {
+      let id = req.params.id
+      if (id >= 0 && id < movies.length){
+        res.send({status:200, data:movies[id]}
+          )
+      }else {
+        res.send({status:404, error:true, message:`the movie ${id} does not exist`}
+          )
+      }
+       
+        
+      })
+
+
 
 
 
