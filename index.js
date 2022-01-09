@@ -97,7 +97,7 @@ app.get('/search', (req, res) => {
       }
       })
 
-      app.get('/movies/add', (req, res) => {
+      app.post('/movies/add', (req, res) => {
         const title = req.query.title
         const year = req.query.year
         const rating = req.query.rating
@@ -118,7 +118,7 @@ app.get('/search', (req, res) => {
        
 
 
-       app.get('/movies/delete/:id', (req, res) => {
+       app.delete('/movies/delete/:id', (req, res) => {
         let id = req.params.id
 
         if(id >= 0 && id < movies.length){
@@ -130,7 +130,7 @@ app.get('/search', (req, res) => {
         }
       })
 
-      app.get("/movies/update/:id", (req, res) => {
+      app.put("/movies/update/:id", (req, res) => {
          let id = req.params.id
          let title = req.query.title
          let year = req.query.year
