@@ -118,6 +118,18 @@ app.get('/search', (req, res) => {
        
 
 
+       app.get('/movies/delete/:id', (req, res) => {
+        let id = req.params.id
+
+        if(id >= 0 && id < movies.length){
+          movies.splice[id ,1]
+          res.send({status:200, data:movies })
+
+        }else{
+          res.send({status:404, error:true, message:`the movie ${id} does not exist`})
+        }
+      })
+      
 app.listen(port, () => {
   console.log(`app listening at http://localhost:${port}`)
 })
