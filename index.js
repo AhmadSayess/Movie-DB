@@ -129,7 +129,27 @@ app.get('/search', (req, res) => {
           res.send({status:404, error:true, message:`the movie ${id} does not exist`})
         }
       })
-      
+
+      app.get("/movies/update/:id", (req, res) => {
+         let id = req.params.id
+         let title = req.query.title
+         let year = req.query.year
+         let rating = req.query.rating
+
+        if(title != undefined && title !=""){
+          movies[id].title=title
+        }
+        if(year != undefined && year !="" ){
+          movies[id].year=year
+        }
+        if(rating != undefined && rating != ""){
+          movies[id].rating=rating
+        }
+        else{
+          res.send(movies[id]);
+        }
+      });
+
 app.listen(port, () => {
   console.log(`app listening at http://localhost:${port}`)
 })
