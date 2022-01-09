@@ -43,6 +43,7 @@ app.get('/search', (req, res) => {
                       { title: 'erheb kabeb', year: 1992, rating: 6.2 }
   ] 
 
+
     app.get('/movies/create', (req, res) => {
       res.send({status:200, message:"create movies"}
       )
@@ -89,18 +90,32 @@ app.get('/search', (req, res) => {
      app.get('/movies/read/id/:id', (req, res) => {
       let id = req.params.id
       if (id >= 0 && id < movies.length){
-        res.send({status:200, data:movies[id]}
-          )
-      }else {
-        res.send({status:404, error:true, message:`the movie ${id} does not exist`}
-          )
+        res.send({status:200, data:movies[id]})
       }
-       
-        
+      else {
+        res.send({status:404, error:true, message:`the movie ${id} does not exist`})
+      }
       })
 
+      app.get('/movies/add', (req, res) => {
+        const title = req.query.title
+        const year = req.query.year
+        const rating = req.query.rating
 
-
+        if(title =="" || title == undefined  || year =="" || year == undefined || year.length != 4 || isNaN(year)){
+          res.send({status:403, error:true, message:'you cannot create a movie without providing a correct title or year'}) 
+        }
+         else if(rating == "" ||  rating == undefined) {
+          let nbr = 4;
+          movies.push({ title:title, year:year, rating:nbr});
+          res.send(movies);
+        }
+        else{
+          movies.push({ title:title, year:year, rating:rating});
+          res.send({ status: 200, data:movies});
+        }
+       })
+       
 
 
 app.listen(port, () => {
